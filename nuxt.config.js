@@ -3,8 +3,12 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true
     },
+    build: {
+        transpile: ["@vuepic/vue-datepicker"],
+    },
     app: {
         head: {
+            title: 'VisioTennis',
             meta: [
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                 { name: 'msapplication-TileColor', content: '#163a5f' },
@@ -27,7 +31,8 @@ export default defineNuxtConfig({
                 { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/img/favicon/favicon-96x96.png' },
                 { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/img/favicon/favicon-16x16.png' },
                 { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-                { rel: 'manifest', href: '/img/favicon/manifest.json' }
+                { rel: 'manifest', href: '/img/favicon/manifest.json' },
+                { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css' }
             ],
             script: [
                 // { src: '/js/jquery.min.js' },
@@ -38,5 +43,8 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt'
-    ]
+    ],
+    plugins: [
+        "@/plugins/vuedatepicker",
+    ],
 })

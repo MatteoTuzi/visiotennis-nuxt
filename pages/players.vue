@@ -51,12 +51,12 @@
                                     </td>
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <p class="text-gray-900 whitespace-nowrap">
-                                            {{ u.attributes.createdAt }}
+                                            {{ formatDateTime(u.attributes.createdAt) }}
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <p class="text-gray-900 whitespace-nowrap">
-                                            {{ u.attributes.updatedAt }}
+                                            {{ formatDateTime(u.attributes.updatedAt) }}
                                         </p>
                                     </td>
 
@@ -75,6 +75,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { usePlayerStore } from '../stores/player'
+import dayjs from 'dayjs'
 
 export default defineComponent({
     name: "Players",
@@ -86,6 +87,9 @@ export default defineComponent({
     data() {
         return {
             playerStore: usePlayerStore(),
+            formatDateTime: (date) => {
+                return dayjs(date).format('DD/MM/YYYY HH:mm:ss');
+            }
         }
     },
 

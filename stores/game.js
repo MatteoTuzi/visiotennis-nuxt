@@ -16,7 +16,7 @@ export const useGameStore = defineStore('game', {
     actions: {
         async getAllGames() {
             return new Promise( (resolve, reject) => {
-                axios.get("https://azure.andreacorriga.com/visiotennis/api/games?populate=*")
+                axios.get("https://azure.andreacorriga.com/visiotennis/api/games?populate=*&sort[0]=createdAt:desc")
                 .then( (response) => {
                     this.gamesObj = response.data.data
                     this.metaObj = response.data.metaObj
@@ -27,5 +27,18 @@ export const useGameStore = defineStore('game', {
                 })
             })
         },
+        async addGame(game) {
+            return new Promise( (resolve, reject) => {
+                const body = {
+                    data: game
+                }
+                axios.post("https://azure.andreacorriga.com/visiotennis/api/games", body)
+                .then( (response) => {
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        }
     },
 })

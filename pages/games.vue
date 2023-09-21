@@ -1,8 +1,12 @@
 <template>
     <div>
-        <h3 class="text-3xl font-medium text-gray-700">
-            Partite giocate
-        </h3>
+        <div class="flex sm:flex-row">
+            <h3 class="text-3xl font-medium text-gray-700">
+                Partite giocate
+            </h3>
+            <button class="btn ml-auto"> <i class="fa w-4 h-4 mr-2"></i> <NuxtLink to="/newGame">Nuova partita </NuxtLink> </button>
+        </div>
+        
 
         <div class="mt-8" />
 
@@ -58,7 +62,7 @@
                                 </td>
                                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                     <div class="text-sm leading-5 text-gray-900">
-                                        {{ game?.attributes?.winner?.data?.attributes.player_name }}
+                                        <b>{{ game?.attributes?.winner?.data?.attributes.player_name }}</b>
                                     </div>
                                 </td>
                                 
@@ -92,7 +96,7 @@
 </template>
 
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 import { useGameStore } from '../stores/game'
 import dayjs from 'dayjs'
@@ -100,14 +104,15 @@ import dayjs from 'dayjs'
 export default defineComponent({
     name: "Games",
     mounted() {
-            definePageMeta({
-                layout: "dashboard",
-            })
+        definePageMeta({
+            layout: "dashboard",
+        })
+        this.getGames()
     },
     data() {
         return {
             gameStore: useGameStore(),
-            formatDate: (date: string) => dayjs(date).format('DD/MM/YYYY HH:mm:ss')
+            formatDate: (date) => dayjs(date).format('DD/MM/YYYY HH:mm:ss')
         }
     },
 
@@ -116,10 +121,6 @@ export default defineComponent({
             await this.gameStore.getAllGames()
             console.log(this.gameStore.games)
         },
-    },
-
-    mounted() {
-        this.getGames()
     }
 })
 </script>
