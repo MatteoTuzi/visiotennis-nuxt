@@ -1,5 +1,6 @@
 
 import { defineStore } from 'pinia'
+import { usePlayerStore } from './player.js'
 import axios from 'axios'
 
 export const useGameStore = defineStore('game', {
@@ -53,6 +54,63 @@ export const useGameStore = defineStore('game', {
                     reject(error)
                 })
             })
+        },
+        async updateGame(game) {
+            return new Promise( (resolve, reject) => {
+                const body = {
+                    data: game
+                }
+                axios.put("https://azure.andreacorriga.com/visiotennis/api/games/" + game.id, body)
+                .then( (response) => {
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+        async deleteGame(game) {
+            return new Promise( (resolve, reject) => {
+                axios.delete("https://azure.andreacorriga.com/visiotennis/api/games/" + game.id)
+                .then( (response) => {
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+        async getMostValuablePlayer() {
+            await this.getAllGamesPaginated(1, 1000)
+            
+            let maxPlayer = null
+            let maxPlayerScore = 0
+            let players = [0]
+            this.games.forEach(game => {
+                const winner = game.attributes.winner
+                if (winner) {
+                    if (players[winner.data.id]) {
+                        players[winner.data.id]++
+                    } else {
+                        players[winner.data.id] = 1
+                    }
+                }
+            })
+
+            for (const [key, value] of Object.entries(players)) {
+                if (value > maxPlayerScore) {
+                    maxPlayerScore = value
+                    maxPlayer = key
+                }
+            }
+            
+            await usePlayerStore().getPlayers()
+
+            const player = usePlayerStore().players.find(player => player.id == maxPlayer)
+
+            const mvp = {
+                maxPlayerScore,
+                player
+            }
+            return mvp
         }
     },
 })
