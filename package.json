@@ -23,6 +23,7 @@
         "@vuepic/vue-datepicker": "^6.1.0",
         "axios": "^1.4.0",
         "dayjs": "^1.11.10",
+        "nuxi": "^3.9.0",
         "pinia": "^2.1.6",
         "tom-select": "^2.2.2",
         "vuelidate": "^0.7.7"

@@ -1,5 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
+    runtimeConfig: {
+        public: {
+            basePath: process.env.BASE_STRAPI_URL
+        }
+    },
     devtools: {
         enabled: true
     },

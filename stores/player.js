@@ -14,16 +14,12 @@ export const usePlayerStore = defineStore('player', {
     },
     actions: {
         async getPlayers() {
-            return new Promise( (resolve, reject) => {
-                axios.get("https://azure.andreacorriga.com/visiotennis/api/players")
-                .then( (response) => {
-                    this.playersObj = response.data.data
-                    this.metaObj = response.data .meta
-                    resolve(response)
-                }).catch(error => {
-                    reject(error)
-                })
-            })
+            const response = await $fetch(`${useRuntimeConfig().public.basePath}/api/login`, {
+                method: 'GET'
+            }) 
+            this.playersObj = response.data
+            this.metaObj = response.meta
+            
         },
     },
 })
