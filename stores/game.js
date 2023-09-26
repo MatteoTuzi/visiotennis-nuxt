@@ -30,9 +30,7 @@ export const useGameStore = defineStore('game', {
                     })
             })
         },
-        async getAllGamesPaginated(page, pageSize) {
-            
-            console.log(this.config)
+        async getAllGamesPaginated(page, pageSize) {            
             return new Promise((resolve, reject) => {
                 axios.get(this.config.public.basePath + "api/games?populate=*&sort[0]=createdAt:desc&pagination[page]=" + page + "&pagination[pageSize]=" + pageSize)
                 .then((response) => {

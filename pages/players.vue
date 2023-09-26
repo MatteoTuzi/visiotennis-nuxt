@@ -103,7 +103,6 @@ export default defineComponent({
         async getPlayers() {
             await this.playerStore.getPlayers()
             this.players = this.playerStore.players
-            console.log(this.players)
         },
     }
 })

@@ -149,7 +149,6 @@ export default defineComponent({
     methods: {
         async getGames() {
             await this.gameStore.getAllGamesPaginated(this.page, this.pageSize)
-            console.log(this.gameStore.games)
         },
         async goToNextPage() {
             if(this.page + 1 > this.gameStore.pagination.pageCount) return

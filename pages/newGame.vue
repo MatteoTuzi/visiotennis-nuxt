@@ -148,14 +148,12 @@ export default defineComponent({
                 this.game.player_1 = this.playerStore.players.find((player) => player.attributes.player_name === this.game.player_1)
                 this.game.player_2 = this.playerStore.players.find((player) => player.attributes.player_name === this.game.player_2)
                 this.game.winner = this.playerStore.players.find((player) => player.attributes.player_name === this.game.winner)
-                console.log(this.game)
                 await this.gameStore.addGame(this.game)
                 this.router.push({ name: 'games' })
             }
         },
         async populateTomSelectPlayer(selectId, playerOption){
             const players = this.playerStore.players
-            console.log(players)
             var player1Options = players.map((player) => {
                 return {value: player.attributes.player_name, text: player.attributes.player_name}
             })
