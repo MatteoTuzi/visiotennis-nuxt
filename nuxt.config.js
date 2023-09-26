@@ -9,7 +9,7 @@ export default defineNuxtConfig({
             basePath: process.env.BASE_STRAPI_URL
         },
         app: {
-            baseURL: "/visiotennis/",
+            baseURL: "/",
             buildAssetsDir: "/_nuxt/",
             cdnURL: 'https://interno.visioscientiae.com/visiotennis/'
         }
