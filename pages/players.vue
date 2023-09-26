@@ -33,7 +33,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(u, index) in players.data" :key="index">
+                                <tr v-for="(u, index) in players" :key="index">
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <div class="flex items-center">
 
