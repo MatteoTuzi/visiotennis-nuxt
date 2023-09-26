@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     },
     build: {
         transpile: ["@vuepic/vue-datepicker"],
+        publicPath: '/visiotennis/'
     },
     app: {
         baseURL: '/visiotennis/',
@@ -49,7 +50,9 @@ export default defineNuxtConfig({
             ]
         }
     },
-
+    router: {
+        base: '/visiotennis/'
+    },
     modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt'
