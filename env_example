@@ -1,1 +1,2 @@
-BASE_STRAPI_URL = "http://localhost:1336/visiotennis/" #or change with the url of your strapi instance
+BASE_STRAPI_URL="http://localhost:1336/visiotennis/" #or change with the url of your strapi instance
+NUXT_APP_BASE_URL=/visiotennis/
