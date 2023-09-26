@@ -28,7 +28,8 @@ export default defineNuxtConfig({
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                 { name: 'msapplication-TileColor', content: '#163a5f' },
                 { name: 'msapplication-TileImage', content: 'img/favicon/ms-icon-144x144.png' },
-                { name: 'theme-color', content: '#ffffff' }
+                { name: 'theme-color', content: '#ffffff' },
+                { name: 'robots', content: 'noindex, nofollow' }
             ],
             link: [
                 { rel: 'stylesheet', type: 'text/css', href: 'css/main.css' },
