@@ -10,8 +10,7 @@ export default defineNuxtConfig({
         },
         app: {
             baseURL: "/",
-            buildAssetsDir: "/_nuxt/",
-            cdnURL: 'https://interno.visioscientiae.com/visiotennis/'
+            buildAssetsDir: "/_nuxt/"
         }
     },
     devtools: {
