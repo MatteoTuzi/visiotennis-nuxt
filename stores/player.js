@@ -18,8 +18,8 @@ export const usePlayerStore = defineStore('player', {
             return new Promise((resolve, reject) => {
                 axios.get(this.config.public.basePath + "api/players?populate=*&sort[0]=createdAt:desc")
                     .then((response) => {
-                        this.playersObj = response.data
-                        this.metaObj = response.meta
+                        this.playersObj = response.data.data
+                        this.metaObj = response.data.meta
                         resolve(response)
                     }).catch(error => {
                         reject(error)
