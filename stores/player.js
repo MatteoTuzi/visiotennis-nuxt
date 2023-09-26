@@ -5,7 +5,8 @@ export const usePlayerStore = defineStore('player', {
     state: () => {
         return {
             playersObj: {},
-            metaObj: {}
+            metaObj: {},
+            config: useRuntimeConfig()
         }
     },
     getters: {
@@ -14,12 +15,18 @@ export const usePlayerStore = defineStore('player', {
     },
     actions: {
         async getPlayers() {
-            const response = await $fetch(`${useRuntimeConfig().public.basePath}/api/login`, {
-                method: 'GET'
-            }) 
-            this.playersObj = response.data
-            this.metaObj = response.meta
-            
+            return new Promise((resolve, reject) => {
+                axios.get(this.config.public.basePath + "api/players?populate=*&sort[0]=createdAt:desc")
+                    .then((response) => {
+                        this.playersObj = response.data
+                        this.metaObj = response.meta
+                        resolve(response)
+                    }).catch(error => {
+                        reject(error)
+                    })
+            })
+
+
         },
     },
 })

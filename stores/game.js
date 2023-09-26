@@ -7,7 +7,8 @@ export const useGameStore = defineStore('game', {
     state: () => {
         return {
             gamesObj: {},
-            metaObj: {}
+            metaObj: {},
+            config: useRuntimeConfig()
         }
     },
     getters: {
@@ -17,10 +18,8 @@ export const useGameStore = defineStore('game', {
     },
     actions: {
         async getAllGames() {
-            const config = useRuntimeConfig()
-
             return new Promise((resolve, reject) => {
-                axios.get(process.env.BASE_STRAPI_URL + "api/games?populate=*&sort[0]=createdAt:desc")
+                axios.get(this.config.public.basePath + "api/games?populate=*&sort[0]=createdAt:desc")
                     .then((response) => {
                         this.gamesObj = response.data.data
                         this.metaObj = response.data.meta
@@ -32,11 +31,14 @@ export const useGameStore = defineStore('game', {
             })
         },
         async getAllGamesPaginated(page, pageSize) {
-            const config = useRuntimeConfig()
-
+            
+            console.log(this.config)
             return new Promise((resolve, reject) => {
-                axios.get(config.public.basePath + "/api/games?populate=*&sort[0]=createdAt:desc&pagination[page]=" + page + "&pagination[pageSize]=" + pageSize)
-                    .then((response) => {
+                axios.get(this.config.public.basePath + "api/games?populate=*&sort[0]=createdAt:desc&pagination[page]=" + page + "&pagination[pageSize]=" + pageSize,{
+                    headers: { "Access-Control-Allow-Origin": "*", 'Access-Control-Allow-Headers': '*', },
+                })
+                    
+                .then((response) => {
                         this.gamesObj = response.data.data
                         this.metaObj = response.data.meta
 
@@ -51,7 +53,7 @@ export const useGameStore = defineStore('game', {
                 const body = {
                     data: game
                 }
-                axios.post(process.env.basePath + "api/games", body)
+                axios.post(this.config.public.basePath + "api/games", body)
                     .then((response) => {
                         resolve(response)
                     }).catch(error => {
@@ -64,7 +66,7 @@ export const useGameStore = defineStore('game', {
                 const body = {
                     data: game
                 }
-                axios.put(process.env.basePath + "api/games/" + game.id, body)
+                axios.put(this.config.public.basePath + "api/games/" + game.id, body)
                     .then((response) => {
                         resolve(response)
                     }).catch(error => {
@@ -74,7 +76,7 @@ export const useGameStore = defineStore('game', {
         },
         async deleteGame(game) {
             return new Promise((resolve, reject) => {
-                axios.delete(process.env.basePath + "api/games/" + game.id)
+                axios.delete(this.config.public.basePath + "api/games/" + game.id)
                     .then((response) => {
                         resolve(response)
                     }).catch(error => {
