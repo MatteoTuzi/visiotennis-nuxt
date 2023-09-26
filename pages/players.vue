@@ -81,9 +81,13 @@ import dayjs from 'dayjs'
 export default defineComponent({
     name: "Players",
     mounted() {
+        
         definePageMeta({
             layout: "dashboard",
         })
+
+        this.getPlayers()
+
     },
     data() {
         return {
@@ -101,10 +105,6 @@ export default defineComponent({
             this.players = this.playerStore.players
             console.log(this.players)
         },
-    },
-
-    mounted() {
-        this.getPlayers()
     }
 })
 </script>
