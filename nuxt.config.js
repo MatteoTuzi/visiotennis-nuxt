@@ -16,6 +16,7 @@ export default defineNuxtConfig({
         transpile: ["@vuepic/vue-datepicker"],
     },
     app: {
+        baseURL: '/visiotennis/',
         head: {
             title: 'VisioTennis',
             meta: [

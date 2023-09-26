@@ -12,7 +12,7 @@
                     <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
                         <table class="min-w-full leading-normal">
                             <thead>
-                                
+
                                 <tr>
                                     <th
                                         class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
@@ -33,37 +33,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(u, index) in playerStore.players" :key="index">
+                                <tr v-for="(u, index) in players.data" :key="index">
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <div class="flex items-center">
-                                            
+
                                             <div class="ml-3">
                                                 <p class="text-gray-900 whitespace-nowrap">
-                                                    {{ u.attributes.full_name }}
+                                                    {{ u?.attributes?.full_name }}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <p class="text-gray-900 whitespace-nowrap">
-                                            {{ u.attributes.player_name }}
+                                            {{ u?.attributes?.player_name }}
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <p class="text-gray-900 whitespace-nowrap">
-                                            {{ formatDateTime(u.attributes.createdAt) }}
+                                            {{ formatDateTime(u?.attributes?.createdAt) }}
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
                                         <p class="text-gray-900 whitespace-nowrap">
-                                            {{ formatDateTime(u.attributes.updatedAt) }}
+                                            {{ formatDateTime(u?.attributes?.updatedAt) }}
                                         </p>
                                     </td>
 
                                 </tr>
+
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
             </div>
@@ -87,6 +88,7 @@ export default defineComponent({
     data() {
         return {
             playerStore: usePlayerStore(),
+            players: [],
             formatDateTime: (date) => {
                 return dayjs(date).format('DD/MM/YYYY HH:mm:ss');
             }
@@ -96,7 +98,8 @@ export default defineComponent({
     methods: {
         async getPlayers() {
             await this.playerStore.getPlayers()
-            console.log(this.playerStore.players)
+            this.players = this.playerStore.players
+            console.log(this.players)
         },
     },
 
